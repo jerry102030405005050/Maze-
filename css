@@ -1,0 +1,62 @@
+@font-face {
+           font-family: 'stone_punkregular';
+            src: url('webfontkit/stonepunk-ezd4g-webfont.woff2');
+            font-weight: lighter;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url('Marvel.jpg');
+            background-size: cover;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 7em;
+            color:  #222222;
+            margin-bottom: 20px;
+            font-family: 'stone_punkregular';
+        }
+
+        .maze-container {
+            display: grid;
+            grid-template-columns: repeat(10, 50px);
+            grid-template-rows: repeat(10, 50px);
+            gap: 2px;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+
+        .wall {
+            background-color:#5C4033;
+        }
+
+        .start {
+            background-color:#222222 ;
+
+        }
+
+        .end {
+            background-color: #FFCA4B;
+        }
+
+        .player {
+            background-color:#222222 ;
+        }
+
+        .congratulations {
+            font-size: 5em;
+            color:  #222222;
+            margin-top: 20px;
+            display: none;
+            font-family: stone_punkregular;
+        }
