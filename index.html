@@ -1,0 +1,126 @@
+<html>
+<head>
+    <title>Maze Game</title>
+    <style>
+        @font-face {
+           font-family: 'stone_punkregular';
+            src: url('webfontkit/stonepunk-ezd4g-webfont.woff2');
+            font-weight: lighter;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url('Marvel.jpg');
+            background-size: cover;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 7em;
+            color:  #222222;
+            margin-bottom: 20px;
+            font-family: 'stone_punkregular';
+        }
+
+        .maze-container {
+            display: grid;
+            grid-template-columns: repeat(10, 50px);
+            grid-template-rows: repeat(10, 50px);
+            gap: 2px;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            box-sizing: border-box;
+        }
+
+        .wall {
+            background-color:#5C4033;
+        }
+
+        .start {
+            background-color:#222222 ;
+
+        }
+
+        .end {
+            background-color: #FFCA4B;
+        }
+
+        .player {
+            background-color:#222222 ;
+        }
+
+        .congratulations {
+            font-size: 5em;
+            color:  #222222;
+            margin-top: 20px;
+            display: none;
+            font-family: stone_punkregular;
+        }
+    </style>
+</head>
+<body>
+    <h1>MONKEY MAZE</h1>
+    <div class="maze-container" id="maze">
+        <div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell start player" id="player"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell end"></div><div class="cell wall"></div>
+        <div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div><div class="cell wall"></div>
+    </div>
+    <div class="congratulations" id="congratulations">Congratulations! You completed the maze!</div>
+    <script>
+        document.addEventListener('keydown', (event) => {
+            const key = event.code;
+
+            const player = document.getElementById('player');
+            const maze = document.getElementById('maze');
+            const cells = maze.querySelectorAll('.cell');
+            const index = Array.prototype.indexOf.call(cells, player);
+            const columns = 10;
+
+            let newIndex;
+
+            switch (key) {
+                case 'ArrowUp':
+                    newIndex = index - columns;
+                    break;
+                case 'ArrowDown':
+                    newIndex = index + columns;
+                    break;
+                case 'ArrowLeft':
+                    newIndex = index - 1;
+                    break;
+                case 'ArrowRight':
+                    newIndex = index + 1;
+                    break;
+                default:
+                    return;
+            }
+
+            if (newIndex >= 0 && newIndex < cells.length && !cells[newIndex].classList.contains('wall')) {
+                player.classList.remove('player');
+                cells[newIndex].classList.add('player');
+                player.id = '';
+                cells[newIndex].id = 'player';
+
+                if (cells[newIndex].classList.contains('end')) {
+                    document.getElementById('congratulations').style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
